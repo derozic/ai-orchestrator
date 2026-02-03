@@ -1,0 +1,69 @@
+ai.local {
+    # Frontend - Next.js
+    handle /* {
+        reverse_proxy localhost:3000
+    }
+    
+    # Backend API - FastAPI
+    handle /api/* {
+        reverse_proxy localhost:8765
+    }
+    
+    # Direct backend access (without /api prefix)
+    handle /models {
+        reverse_proxy localhost:8765
+    }
+    
+    handle /execute {
+        reverse_proxy localhost:8765
+    }
+    
+    handle /chain {
+        reverse_proxy localhost:8765
+    }
+    
+    handle /ollama/* {
+        reverse_proxy localhost:8765
+    }
+    
+    handle /routing-rules {
+        reverse_proxy localhost:8765
+    }
+    
+    handle /analyze-prompt {
+        reverse_proxy localhost:8765
+    }
+    
+    handle /system/* {
+        reverse_proxy localhost:8765
+    }
+    
+    # WebSocket support for hot reload
+    handle /_next/webpack-hmr {
+        reverse_proxy localhost:3000
+    }
+    
+    # Security headers
+    header {
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        X-XSS-Protection "1; mode=block"
+        Referrer-Policy "strict-origin-when-cross-origin"
+    }
+    
+    # Enable compression
+    encode gzip
+    
+    # Logs
+    log {
+        output file /Users/scottderozic/dev/ai/logs/access.log {
+            roll_size 10mb
+            roll_keep 5
+        }
+    }
+}
+
+# HTTP to HTTPS redirect
+http://ai.local {
+    redir https://ai.local{uri} permanent
+}

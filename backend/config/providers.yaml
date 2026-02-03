@@ -1,0 +1,96 @@
+# API Provider Configuration
+# Supports both free (local) and paid tiers
+
+providers:
+  # Local/Free Providers
+  local:
+    ollama:
+      base_url: "http://localhost:11434"
+      type: "free"
+      priority: 1
+      description: "Local LLMs via Ollama"
+      capabilities:
+        - text_generation
+        - code_generation
+        - reasoning
+      models:
+        - deepseek-r1:32b
+        - deepseek-r1:70b
+        - qwen2.5-coder:32b
+        - kimi:k2
+        - codestral:22b
+        - mistral-large:latest
+
+  # Paid Providers
+  paid:
+    openai:
+      type: "paid"
+      priority: 2
+      description: "OpenAI GPT models"
+      capabilities:
+        - advanced_reasoning
+        - multimodal
+        - function_calling
+      models:
+        - gpt-4o
+        - gpt-4o-mini
+        - gpt-4-turbo
+      requires_key: true
+      
+    anthropic:
+      type: "paid"
+      priority: 2
+      description: "Anthropic Claude models"
+      capabilities:
+        - deep_reasoning
+        - large_context
+        - code_generation
+      models:
+        - claude-3-5-sonnet-latest
+        - claude-3-5-haiku-latest
+        - claude-3-opus-latest
+      requires_key: true
+      
+    google:
+      type: "paid"
+      priority: 2
+      description: "Google Gemini models"
+      capabilities:
+        - multimodal
+        - reasoning
+        - large_context
+      models:
+        - gemini-2.0-flash-exp
+        - gemini-2.0-flash-thinking-exp
+        - gemini-1.5-pro
+      requires_key: true
+
+# Routing Strategy
+routing_strategy:
+  default_mode: "smart"  # Options: free_first, paid_only, smart
+  
+  # Smart routing thresholds
+  complexity_thresholds:
+    simple: 0.3       # Use free models
+    moderate: 0.7     # Consider paid if free fails
+    complex: 1.0      # Prefer paid models
+    
+  # Task-specific overrides
+  task_overrides:
+    heavy_reasoning:
+      preferred: "paid"
+      fallback: "free"
+    
+    coding:
+      preferred: "free"  # Local coders are excellent
+      fallback: "paid"
+      
+    business:
+      preferred: "paid"  # Better for business context
+      fallback: "free"
+
+# Usage Tracking
+usage_limits:
+  daily_paid_requests: 1000
+  hourly_paid_requests: 100
+  alert_threshold: 0.8  # Alert at 80% usage
