@@ -1,0 +1,152 @@
+# Model Configuration for AI Orchestrator
+# Defines model capabilities and routing rules
+
+models:
+  # Primary Daily Driver
+  deepseek-r1-32b:
+    name: "deepseek-r1:32b"
+    type: "reasoning"
+    memory_gb: 32
+    capabilities:
+      - complex_reasoning
+      - code_analysis
+      - architecture_design
+      - debugging
+    priority: 1
+    description: "Primary model with GPT-4 level reasoning and 'thinking' display"
+
+  # Heavy Hitter
+  deepseek-r1-70b:
+    name: "deepseek-r1:70b"
+    type: "heavy_reasoning"
+    memory_gb: 55
+    capabilities:
+      - advanced_mathematics
+      - complex_algorithms
+      - deep_analysis
+      - research_tasks
+    priority: 2
+    description: "#1 ranked model for complex problems"
+
+  # Pure Coding
+  qwen25-coder-32b:
+    name: "qwen2.5-coder:32b"
+    type: "coding"
+    memory_gb: 35
+    capabilities:
+      - code_generation
+      - refactoring
+      - multi_language_support
+      - test_generation
+    priority: 1
+    description: "GPT-4o competitive coding across 92+ languages"
+
+  # Maximum Intelligence
+  qwen3-coder-480b:
+    name: "qwen3-coder:480b"
+    type: "maximum_coding"
+    memory_gb: 60
+    capabilities:
+      - enterprise_code
+      - massive_context
+      - complex_refactoring
+      - system_design
+    priority: 3
+    description: "Claude Sonnet level with 256K context"
+
+  # DevOps Specialist
+  kimi-k2:
+    name: "kimi:k2"
+    type: "devops"
+    memory_gb: 35
+    capabilities:
+      - ci_cd_pipelines
+      - infrastructure_code
+      - log_analysis
+      - automation_scripts
+      - kubernetes_docker
+    priority: 1
+    description: "Agentic DevOps and automation expert"
+
+  # API Architecture
+  codestral-22b:
+    name: "codestral:22b"
+    type: "architecture"
+    memory_gb: 22
+    capabilities:
+      - api_design
+      - rest_graphql
+      - database_schema
+      - clean_architecture
+      - documentation
+    priority: 1
+    description: "Specialized in API and clean code structure"
+
+  # Enterprise Reasoning
+  mistral-large:
+    name: "mistral-large:latest"
+    type: "business"
+    memory_gb: 50
+    capabilities:
+      - business_logic
+      - documentation
+      - requirements_analysis
+      - project_planning
+    priority: 2
+    description: "Enterprise reasoning and documentation"
+
+  # Fast Iteration
+  devstral-small-24b:
+    name: "devstral-small-2:24b"
+    type: "fast_coding"
+    memory_gb: 25
+    capabilities:
+      - quick_fixes
+      - code_review
+      - rapid_prototyping
+      - testing
+    priority: 1
+    description: "Fast iteration and code review"
+
+  # Ultra Light
+  ministral-3-14b:
+    name: "ministral-3:14b"
+    type: "lightweight"
+    memory_gb: 16
+    capabilities:
+      - exploration
+      - simple_tasks
+      - quick_tests
+      - basic_coding
+    priority: 1
+    description: "Ultra-light for testing and exploration"
+
+# Task Routing Rules
+routing_rules:
+  - pattern: "debug|fix|error|bug"
+    model_type: "reasoning"
+    
+  - pattern: "implement|write|code|function|class"
+    model_type: "coding"
+    
+  - pattern: "deploy|ci|cd|docker|kubernetes|infrastructure"
+    model_type: "devops"
+    
+  - pattern: "api|rest|graphql|schema|architecture"
+    model_type: "architecture"
+    
+  - pattern: "document|requirements|business|plan"
+    model_type: "business"
+    
+  - pattern: "complex|research|analyze|mathematical"
+    model_type: "heavy_reasoning"
+    
+  - pattern: "quick|simple|test|explore"
+    model_type: "lightweight"
+
+# Memory Management
+memory_thresholds:
+  low: 16  # GB - Use lightweight models
+  medium: 32  # GB - Use standard models
+  high: 50  # GB - Can use heavy models
+  maximum: 60  # GB - Can use any model
