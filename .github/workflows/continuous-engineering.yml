@@ -1,0 +1,19 @@
+# Continuous engineering: NorthStar evaluates + Loom proposes optimizations daily,
+# persisting learnings to this repo's `agent-memory` branch (recursive self-learning).
+# Logic lives in the shared reusable workflow; this is just the caller.
+name: Continuous Engineering
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # daily at 06:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  learn:
+    uses: derozic/agents/.github/workflows/continuous-engineering.reusable.yml@v0.1.1
+    with:
+      ref: v0.1.1
+      agents: "northstar loom"
+    secrets:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      AGENTS_TOKEN: ${{ secrets.AGENTS_TOKEN }}
