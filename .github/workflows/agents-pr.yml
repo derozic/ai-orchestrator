@@ -1,0 +1,19 @@
+# Lego (tests) + Tegan (design) review every pull request.
+# Tegan no-ops automatically when a PR contains no UI files.
+# Logic lives in the shared reusable workflow; this is just the caller.
+name: Agents PR
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+jobs:
+  review:
+    if: github.event.pull_request.draft == false
+    uses: derozic/agents/.github/workflows/agent-pr.reusable.yml@v0.1.1
+    with:
+      ref: v0.1.1
+      agents: "lego tegan"
+    secrets:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      AGENTS_TOKEN: ${{ secrets.AGENTS_TOKEN }}
