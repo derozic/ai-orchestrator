@@ -1,5 +1,8 @@
 # AI Orchestrator Documentation
 
+Person accounts, when added, follow `~/dev/ENTITY_LOGIN.md` (this repo:
+`docs/ENTITY_LOGIN.md`). No password.
+
 Welcome to the AI Orchestrator documentation. This system provides intelligent routing between local and cloud-based AI models, with comprehensive workflow automation and service integration capabilities.
 
 ## 🚀 Features

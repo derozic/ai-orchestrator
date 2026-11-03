@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -H 127.0.0.1",
     "build": "next build",
-    "start": "next start"
+    "start": "next start -H 127.0.0.1"
   },
   "dependencies": {
-    "next": "16.1.6",
+    "next": "16.4.3",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
@@ -19,5 +19,10 @@
     "@types/react-dom": "^19",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "pnpm": {
+    "overrides": {
+      "sharp": "^0.35.5"
+    }
   }
 }

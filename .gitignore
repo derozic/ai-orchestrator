@@ -61,3 +61,6 @@ logs/
 *.pid
 *.seed
 *.pid.lock
+
+# CodeGraph local knowledge-graph index. Rebuild with: codegraph init
+.codegraph/
